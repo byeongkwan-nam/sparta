@@ -40,71 +40,66 @@
       border-color: #e9ecef;
       border-radius: 0.3rem;
       border: solid;
-      display: block;
+      display: none;
     }
   </style>
 
   <script>
-    function changeStatus() {
 
-
+    function boxToggle() {
       let component = $('#post-box');
-      let button = $('#btn-posting-box');
-      let status = component.css('display');
+      let button = $('#toggle-button');
+      let box_status = component.css('display');
 
-
-
-
-
-      if (status == 'none'){
-
+      if (box_status == 'none') {
         component.show();
-        button.text('포스팅 박스 열기');
-
+        button.text('포스팅박스 닫기');
       } else {
-
         component.hide();
-        button.text('포스팅 박스 닫기');
-
+        button.text('포스팅박스 열기');
       }
+    }
 
 
 
+    $(document).ready(function(){
+      $('#cards-box').empty();
+      listing();
+    });
 
+    function listing() {
       $.ajax({
         type: "GET",
-        url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99",
+        url: "http://spartacodingclub.shop/post",
         data: {},
         success: function(response){
-          // 값 중 도봉구의 미세먼지 값만 가져오기
-          let dobong = response["RealtimeCityAir"]["row"][11];
-          let gu_name = dobong['MSRSTE_NM'];
-          let gu_mise = dobong['IDEX_MVL'];
-          $('#btn-posting-box').text(gu_name + ':' + gu_mise);
-
-
+           let articles = response['articles'];
+           for (let i = 0; i < articles.length; i++) {
+              make_card(articles[i]['comment'],articles[i]['desc'],articles[i]['image'],articles[i]['title'],articles[i]['url'])
+           }
         }
       })
-
-
-
     }
 
-    
 
 
-    function test() {
+
+    function make_card(comment, desc, image, title, url) {
       let temp_html = '<div class="card">\
-      <img class="card-img-top" src="https://www.fodors.com/wp-content/uploads/2018/10/4_UltimateRome_PiazzaNavona-975x650.jpg" alt="Card image cap">\
-      <div class="card-body">\
-        <h5 class="card-title">예를 들면 이렇게 카드가 나옵니다!!</h5>\
-        <p class="card-text">여기에 기사 내용이 들어가겠죠</p>\
-        <p class="card-text comment">여기엔 코멘트가 들어갑니다</p>\
-      </div>\
-    </div>\
-  </div>';
+        <img class="card-img-top" src="'+image+'" alt="Card image cap">\
+        <div class="card-body">\
+          <a href="'+url+'" target="_blank" class="card-title">'+title+'</a>\
+          <p class="card-text">'+desc+'</p>\
+          <p class="card-text comment">'+comment+'</p>\
+        </div>\
+      </div>';
       $('#cards-box').append(temp_html);
     }
+
+
+
+
+
 
   </script>
 
@@ -113,10 +108,10 @@
   <div class="wrap">
     <div class="jumbotron">
       <h1 class="display-4">나홀로 링크 메모장!</h1>
-      <p class="lead" onclick="test()">중요한 링크를 저장해두고, 나중에 볼 수 있는 공간입니다</p>
+      <p class="lead">중요한 링크를 저장해두고, 나중에 볼 수 있는 공간입니다</p>
       <hr class="my-4">
       <p class="lead">
-        <a class="btn btn-primary btn-lg" href="#" role="button" id="btn-posting-box" onclick="changeStatus()">포스팅박스 열기</a>
+        <a onclick="boxToggle()" class="btn btn-primary btn-lg" href="#" role="button" id="toggle-button">포스팅박스 열기</a>
       </p>
     </div>
 
@@ -135,8 +130,6 @@
         <button type="button" class="btn btn-primary">기사저장</button>
       </div>
     </div>
-
-
 
 
 
