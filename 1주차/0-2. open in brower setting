@@ -1,0 +1,17 @@
+이번에 설명하는 기능을 사용하기 위해서는 SidebarEnhancements 패키지가 설치되어 있어야한다. 해당 플러그인은 사이드바 기능에 관한 패키지이다.
+
+‘ctrl + shift + p’로 패키지 컨트롤 입력창을 띄우고 install package를 선택한다.
+SidebarEnhancements를 검색해서 설치한다.
+설치를 완료 했다면 ‘preferences – package settings – side bar – key bindings – user 를 선택한다.
+새로운 창이 열리는 데 그 곳에 아래 코드를 입력한다.
+
+[
+    { "keys": ["f12"],
+        "command": "side_bar_open_in_browser" ,
+        "args":{"paths":[], "type":"testing", "browser":"chrome"}    // 크롬 브라우저로 미리보기 설정
+    },
+    { "keys": ["alt+f12"],
+        "command": "side_bar_open_in_browser",
+        "args":{"paths":[], "type":"production", "browser":"Firefox"}    // 파이어폭스 브라우저로 미리보기 설정
+    }
+]	

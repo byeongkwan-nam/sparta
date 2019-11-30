@@ -1,0 +1,19 @@
+.container{
+	width: 900px;
+	margin: 20px auto 0 auto;
+}
+
+
+.form-post{
+	width: 500px;
+	margin: 20px auto;
+
+	border-style: solid;
+	border-radius: 10px;
+
+	padding: 30px;
+}
+
+.card-comment{
+	color: blue;
+}

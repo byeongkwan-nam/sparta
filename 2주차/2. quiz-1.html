@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+  <meta charset="UTF-8">
+    <title>JQuery 연습하고 가기!</title>
+
+    <!-- JQuery를 import 합니다 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <style type="text/css">
+      div.question-box {
+        margin: 10px 0 20px 0;
+      }
+
+      h6.warning {
+        /* 여기도 코드가 필요하겠죠? 빨간색 글씨 */
+      }
+    </style>
+
+    <script>
+      function q1(){
+
+
+      }
+
+      function q5(){
+
+        // 1. 유저 입력을 받아오고
+        // 그것을 user_input에 저장한다.
+        let user_input = $('#input-q5').val();
+
+        // 2. @의 위치를 찾는다. 포함되어 있지 않다면 -1을 리턴한다.
+        // @의 위치를 index에 저장한다.
+        let index = user_input.indexOf('@');
+
+        // 3-1. @가 포함되어 있지 않다면
+        if (index == -1) {
+
+          // 3-1-2. 
+          $('#domain-q5').hide();
+          $('#warning-q5').show();
+          $('#warning-q5').css('color', 'red');
+
+
+        // 3-2. @가 포함되어 있다면
+        } else {
+
+          // 3-3. @ 뒤에 부분을 잘라내라. 시작점은 index + 1, 끝점은 문자열 전체의 길이
+          let result = user_input.substring(index + 1, user_input.length);
+          // 3-4. 텍스트를 넣어라.
+
+          // 3-4-1. id="domain-q5"를 찾는다. 제이쿼리로.
+          let hsix = $('#domain-q5')
+
+          // 3-4-2. 그 안의 텍스트를 "여기에 도메인을 찍어주세요" -> result로 바꾼다.
+          hsix.text(result);
+
+
+          // 3-5. # warning-q5 를 숨긴다.
+          $('#warning-q5').hide();
+          $('#domain-q5').show();
+
+        }
+
+      }
+
+      function q7() {
+        // 1. input 박스를 찾는다.
+        let input_box = $('#input-q7');
+
+        // 2. 그 안의 값을 가져온다.
+        let user_input = input_box.val();
+
+        // 3. 그걸 li 로 만든다. <li>유저 입력값</li>
+        let component = '<li>' + user_input + '</li>';
+
+        // 4. appned(); 사용해서, 리스트에 붙여준다. 
+        // 4-1. 리스트를 찾는다.
+        let list = $('#names-q7');
+        // 4-2. 리스트에 component를 붙여준다.
+        // ul 안에 넣어준다. append();
+        list.append(component);
+
+        // 5. 지운다.
+        input_box.val('');
+      }
+
+      function q7_remove() {
+        $('#names-q7').empty();
+      }
+
+    </script>
+
+  </head>
+  <body>
+    <h1>JQuery+Javascript의 조합을 연습하자!</h1>
+
+    <div class="question-box">
+      <h2>1. 빈칸 체크 함수 만들기</h2>
+      <h5>1-1. 버튼을 눌렀을 때 입력한 글자로 얼럿 띄우기</h5>
+      <h5>[완성본]1-2. 버튼을 눌렀을 때 칸에 아무것도 없으면 "입력하세요!" 얼럿 띄우기</h5>
+      <input id="input-q1" type="text"/> <button onclick="q1()">클릭</button>
+    </div>
+    <hr/>
+    <div class="question-box">
+      <h2>2. 이메일 판별 함수 만들기</h2>
+      <h5>2-1. 이메일이 아니면(@가 없으면) 얼럿 띄우기(찾아보기!)</h5>
+      <h5>2-2. 메일 도메인을 가져와서 얼럿 띄우기(1주차 17번 참고!)</h5>
+      <h5>2-3. 해당 도메인을 텍스트에 찍어주기</h5>
+      <h5>[완성본]2-4. 이메일이 아니면 도메인 대신 빨간색 경고메시지를 보여주기</h5>
+      <input id="input-q5" type="text"/> <button onclick="q5()">클릭</button>
+
+
+      <h6 id="domain-q5">여기에 도메인을 찍어주세요!</h6>
+      
+
+
+
+      <h6 id="warning-q5" class="warning">이메일이 아닙니다.</h6>
+
+
+
+
+    </div>
+    <hr/>
+    <div class="question-box">
+      <h2>3. HTML 붙이기/지우기 연습</h2>
+      <h5>3-1. 이름을 입력하면 아래 나오게 하기</h5>
+      <h5>[완성본]3-2. 다지우기 버튼을 만들기</h5>
+      <input id="input-q7" type="text" placeholder="여기에 이름을 입력"/>
+      <button onclick="q7()">이름 붙이기</button>
+      <button onclick="q7_remove()">다지우기</button>
+
+
+      <ul id="names-q7">
+      </ul>
+
+
+
+
+    </div>
+  </body>
+</html>

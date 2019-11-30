@@ -1,0 +1,7 @@
+상단 Preferences 탭 → Key Bindings - User 항목을 열어 다음의 코드를 추가해준다.
+
+{
+	"keys": ["ctrl+shift+f"], 
+	"command": "reindent", 
+	"args": {"single_line": false}
+}
